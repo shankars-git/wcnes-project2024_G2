@@ -12,15 +12,14 @@ according to https://scdn.rohde-schwarz.com/ur/pws/dl_downloads/dl_application/a
 
 Using a frequency of a channel in the 2450 MHz band:
 
-Aiming for channel 21, 2480 MHz -> required frequency: 5 MHz
-[TODO: can we choose the channel freely? Is it configured in the frame or at the receiver somewhere?]
+Aiming for channel 21, 2455 MHz -> required frequency: 5 MHz
 
-32 instructions per period, not possible to change this (less: can’t compensate for jump-instruction overhead; more: stalls limited to 5 bit)
+32 instructions per period
 
 Required clock frequency: 5 MHz * 32 = 160 MHz
 
 ->	not feasible, max clock frequency is 133 MHz
-	Keep 125 MHz clock frequency, corresponding to 3.9 MHz
+	Use 128 MHz clock frequency, corresponding to 4 MHz
 	[TODO: not too much attenuation?]
 
 
@@ -38,11 +37,9 @@ Length of the bit sequence that will be sent: (original length * 2) - 2
 [TODO: How exactly does the bit rate need to match? Does it play a role that we don’t transmit exactly double the original length?]
 
 We need to transmit 2 000 000 modulated symbols per second -> 500 ns per modulated symbol
-1 period takes ~250 ns (= 1 / 3.9 MHz)
+1 period takes 250 ns (= 1 / 4 MHz)
 -> only two periods per symbol
 
 
-[TODO:	questionable that two periods per symbol is enough
-Does it work?
-Alternatives:	Is the mapping of symbol to phase shift fixed? If not, a more favourable mapping would require just 8 instructions, solving the problem
-Is there a way to describe the symbols in less instructions?]
+[TODO:	is two periods per symbol enough?
+Alternatives:	Use mapping of symbol to phase-shift that requires just 8 instructions]
