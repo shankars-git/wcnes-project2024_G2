@@ -89,7 +89,7 @@ class PioState(BaseModel):
             split = re.split(r"\s+", line.strip())
             if split[0] == ".wrap_target":
                 labels_dict[split[0]] = i
-            elif split[0][-1] == ":":
+            elif len(split[0]) > 1 and split[0][-1] == ":":
                 labels_dict[split[0].replace(":", "")] = i
         return labels_dict
 
